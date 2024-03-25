@@ -1,0 +1,6 @@
+---
+vitex_software_repo_components:
+  - main
+  - backports
+  - borrowed
+  

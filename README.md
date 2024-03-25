@@ -1,22 +1,17 @@
-Role Name
-=========
+Vitex Software debian repository
+================================
 
-A brief description of the role goes here.
+Configure vitexsoftware repository on Debian or Ubuntu based systems for easy installation of our software.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Only Debian/Ubuntu based systems are supported.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+vitex_software_repo_components: [main, games, borrowed]  =  List of components to enable in the repository. Default is all components.
 
 Example Playbook
 ----------------
@@ -25,14 +20,16 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: vitex.vitex_software_repo, vitex_software_repo_components: [main, games] }
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Part of Vitex Software solutions https://www.vitexsoftware.cz/
+
+![The Last Student](thelaststudent.png?raw=true)
