@@ -20,7 +20,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: Vitexus.vitex_software_repo, vitex_software_repo_components: [main, games] }
+         - { role: Vitexus.vitex_software_repo_role, vitex_software_repo_components: [main, games] }
 
 License
 -------
