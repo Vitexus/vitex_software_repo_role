@@ -21,6 +21,16 @@ Including an example of how to use your role (for instance, with variables passe
     - hosts: servers
       roles:
          - { role: Vitexus.vitex_software_repo_role, vitex_software_repo_components: [main, games] }
+      tasks:
+        - name: Check for /etc/apt/sources.list.d/vitexsoftware.list presnece
+          ansible.builtin.stat:
+            path: /etc/apt/sources.list.d/vitexsoftware.list
+          register: vitexsoftware_list
+        - name: Include role to add vitexsoftware repository
+          ansible.builtin.include_role:
+            name: Vitexus.vitex_software_repo_role
+          when: not vitexsoftware_list.stat.exists
+         
 
 License
 -------
