@@ -1,8 +1,10 @@
 galaxy_info:
+  role_name: vitex_software_repo_role
   author: Vítězslav Dvořák
   description: This role installs and configures the VitexSoftware debian repository
   company: VitexSoftware
-
+  issue_tracker_url: https://github.com/Vitexus/vitex_software_repo_role/issues
+  
   license: MIT
 
   min_ansible_version: '2.1'
