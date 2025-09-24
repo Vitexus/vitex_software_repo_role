@@ -1,0 +1,35 @@
+FROM debian:bookworm
+
+# Install required packages
+RUN apt-get update && \
+    apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-apt \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Ansible
+RUN pip3 install --break-system-packages ansible
+
+# Create working directory
+WORKDIR /ansible/tests
+
+# Create role directory structure  
+RUN mkdir -p /ansible/vitex_software_repo_role
+
+# Copy role files to proper location
+COPY ../defaults /ansible/vitex_software_repo_role/defaults/
+COPY ../files /ansible/vitex_software_repo_role/files/
+COPY ../handlers /ansible/vitex_software_repo_role/handlers/
+COPY ../meta /ansible/vitex_software_repo_role/meta/
+COPY ../tasks /ansible/vitex_software_repo_role/tasks/
+COPY ../vars /ansible/vitex_software_repo_role/vars/
+
+# Copy test files
+COPY . /ansible/tests/
+
+CMD ["sleep", "infinity"]

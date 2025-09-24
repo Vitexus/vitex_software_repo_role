@@ -37,6 +37,16 @@ ansible-playbook tests/test.yml --ask-become-pass
 
 # Syntax check
 ansible-playbook tests/test.yml --syntax-check
+
+# Docker-based testing (recommended)
+docker build -f Dockerfile.test -t vitex-repo-role-test .
+docker run --rm -it vitex-repo-role-test ansible-playbook test.yml
+
+# Test idempotency with persistent container
+docker run -d --name test-container vitex-repo-role-test
+docker exec test-container ansible-playbook test.yml  # First run
+docker exec test-container ansible-playbook test.yml  # Second run should show no changes
+docker stop test-container && docker rm test-container
 ```
 
 ### Development Workflow

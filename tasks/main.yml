@@ -1,24 +1,25 @@
 ---
 - name: Download repo key
   ansible.builtin.get_url:
-    url: http://repo.vitexsoftware.cz/pubkey.gpg
+    url: http://repo.vitexsoftware.cz/KEY.gpg
     dest: /etc/apt/trusted.gpg.d/repovitexsoftwarecom-archive.asc
-    mode: 'u=rw,g=r,o=r'
+    mode: '0644'
+    force: no
+
+- name: Check if keyring package is already installed
+  ansible.builtin.package_facts:
+    manager: apt
 
 - name: Download Current VitexSoftware Keyring package
   ansible.builtin.copy:
-    src: repovitexsoftwarecom-archive-keyring_0.1.0_all.deb
+    src: repovitexsoftwarecom-archive-keyring_2.0.0_all.deb
     dest: /tmp/repovitexsoftwarecom-archive-keyring_all.deb
-    mode: 'u=rw,g=r,o=r'
+    mode: '0644'
+  when: "'repovitexsoftwarecom-archive-keyring' not in ansible_facts.packages"
 
 - name: Install VitexSoftware Keyring
   ansible.builtin.apt:
     deb: /tmp/repovitexsoftwarecom-archive-keyring_all.deb
     state: present
+  when: "'repovitexsoftwarecom-archive-keyring' not in ansible_facts.packages"
 
-- name: 'Set repo.vitexsoftware.com sources'
-  ansible.builtin.apt_repository:
-    repo: 'deb [signed-by=/etc/apt/trusted.gpg.d/repovitexsoftwarecom-archive.asc] https://repo.vitexsoftware.com {{ ansible_distribution_release }} {{ vitex_software_repo_components | join(" ") }}'
-    state: present
-    update_cache: true
-    filename: 'vitexsoftware'
