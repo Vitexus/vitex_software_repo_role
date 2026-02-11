@@ -1,6 +1,6 @@
 ---
-vitex_software_repo_components:
-  - main
-  - backports
-  - borrowed
-  
+
+# Defaults for VitexSoftware repo role
+apt_vitexsoftware_suite: "trixie"
+apt_vitexsoftware_components: ["main", "backports"]
+
