@@ -1,4 +1,4 @@
-FROM debian:trixie
+FROM debian:trixie-20260623
 
 # Install required packages
 RUN apt-get update && \
